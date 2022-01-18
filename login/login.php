@@ -1,32 +1,24 @@
 <?php
-
-require_once("config.php");
+require("../koneksi.php");
 
 if (isset($_POST['login'])) {
 
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
-    $sql = "SELECT * FROM users WHERE username=:username OR email=:email";
-    $stmt = $db->prepare($sql);
-
-    // bind parameter ke query
-    $params = array(
-        ":username" => $username,
-        ":email" => $username
-    );
-
-    $stmt->execute($params);
-
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $sql = "SELECT * FROM users WHERE username='$username' OR email='$username'";
+    $user = mysqli_query($koneksi, $sql);
+    $row = mysqli_fetch_assoc($user);
 
     // jika user terdaftar
-    if ($user) {
+    if ($row) {
         // verifikasi password
-        if (password_verify($password, $user["password"])) {
+        if (password_verify($password, $row["password"])) {
             // buat Session
             session_start();
-            $_SESSION["user"] = $user;
+            $_SESSION["user"] = $row["username"];
+            $_SESSION["email"] = $row["email"];
+            $_SESSION["photo"] = $row["photo"];
             // login sukses, alihkan ke halaman timeline
             header("Location: timeline.php");
         }

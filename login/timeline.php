@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Produk data Timeline</title>
 
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
 </head>
 
 <body class="bg-light">
@@ -22,10 +22,10 @@
                 <div class="card">
                     <div class="card-body text-center">
 
-                        <img class="img img-responsive rounded-circle mb-3" width="160" src="img/<?php echo $_SESSION['user']['photo'] ?>" />
+                        <img class="img img-responsive rounded-circle mb-3" width="160" src="img/<?php echo $_SESSION['photo'] ?>" />
 
-                        <h3><?php echo  $_SESSION["user"]["name"] ?></h3>
-                        <p><?php echo $_SESSION["user"]["email"] ?></p>
+                        <h3><?php echo  $_SESSION["user"] ?></h3>
+                        <p><?php echo $_SESSION["email"] ?></p>
 
                         <p><a href="logout.php">Logout</a></p>
                         <p><a href="../crud/index.php">masuk_crud</a></p>

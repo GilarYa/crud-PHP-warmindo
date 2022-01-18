@@ -1,3 +1,12 @@
+<?php
+require('../koneksi.php');
+
+$sql = 'SELECT * FROM produk';
+$query = mysqli_query($koneksi, $sql);
+$products = mysqli_fetch_all($query, MYSQLI_ASSOC);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,8 +14,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="bt/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <script src="bt/js/bootstrap.bundle.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" crossorigin="anonymous">
     <title>tampilan_jual</title>
 </head>
 
@@ -34,14 +42,33 @@
             </form>
         </div>
     </nav>
-    <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <hr>
+                <h3 class="text-center">Daftar Produk</h1>
+                    <hr>
+            </div>
+        </div>
+        <div class="row">
+            <?php foreach ($products as $product) : ?>
+                <div class="col-md-3">
+                    <div class="card" style="width: auto;">
+                        <img src="../assets/images/<?php echo $product['gambar_produk'] ?>" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $product['nama_produk'] ?></h5>
+                            <p class="card-text"><?php echo $product['deskripsi'] ?></p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
+
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

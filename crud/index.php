@@ -1,5 +1,5 @@
 <?php
-include('koneksi.php'); //agar index terhubung dengan database, maka koneksi sebagai penghubung harus di include
+require('../koneksi.php') //agar index terhubung dengan database, maka koneksi sebagai penghubung harus di include
 
 ?>
 <!DOCTYPE html>
@@ -51,7 +51,7 @@ include('koneksi.php'); //agar index terhubung dengan database, maka koneksi seb
                                     <td><?php echo substr($row['deskripsi'], 0, 20); ?>...</td>
                                     <td>Rp <?php echo number_format($row['harga_beli'], 0, ',', '.'); ?></td>
                                     <td>Rp <?php echo $row['harga_jual']; ?></td>
-                                    <td style="text-align: center;"><img src="gambar/<?php echo $row['gambar_produk']; ?>" style="width: 120px;"></td>
+                                    <td style="text-align: center;"><img src="../assets/images/<?php echo $row['gambar_produk']; ?>" style="width: 120px;"></td>
                                     <td>
                                         <a href="edit_produk.php?id=<?php echo $row['id']; ?>">Edit</a> |
                                         <a href="proses_hapus.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
