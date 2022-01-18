@@ -1,6 +1,6 @@
 <?php
 
-require_once("config.php");
+require("../koneksi.php");
 
 if (isset($_POST['register'])) {
 
