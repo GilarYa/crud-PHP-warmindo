@@ -14,23 +14,15 @@ if (isset($_POST['register'])) {
 
     // menyiapkan query
     $sql = "INSERT INTO users (name, username, email, password) 
-            VALUES (:name, :username, :email, :password)";
-    $stmt = $db->prepare($sql);
-
-    // bind parameter ke query
-    $params = array(
-        ":name" => $name,
-        ":username" => $username,
-        ":password" => $password,
-        ":email" => $email
-    );
-
-    // eksekusi query untuk menyimpan ke database
-    $saved = $stmt->execute($params);
-
-    // jika query simpan berhasil, maka user sudah terdaftar
-    // maka alihkan ke halaman login
-    if ($saved) header("Location: login.php");
+            VALUES ('$name', '$username', '$email', '$password')";
+    $query = mysqli_query($koneksi, $sql);
+    if ($query) {
+        // jika berhasil tampilkan pesan berhasil insert
+        header("Location: login.php");
+    } else {
+        // jika gagal tampilkan pesan kesalahan
+        die("Gagal menyimpan perubahan...");
+    }
 }
 
 ?>
